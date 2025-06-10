@@ -1,0 +1,35 @@
+1) -mt-5
+ added in bottom area of chat container
+
+ <img src={assets.gallery_icon} alt="" className="w-5 mr-2 -mt-5 cursor-pointer"/>
+_________________________________________________________________________________
+
+mongodb+srv://manoj:manoj123@cluster0.kbojv4l.mongodb.net
+_________________________________________________________________________________
+2) login , logout, useEffect
+ axios.defaults.headers.common["Authorization"]
+   instead of  ["token"]  in AuthContext
+   ------------------------
+   axios.defaults.headers.common["Authorization"] = data.token;
+ to     axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+   -----------------------
+ axios.defaults.headers.common["token"] = null;
+ to    delete axios.defaults.headers.common["Authorization"];
+___________________________________________________________________________
+
+3) to usercontroller of backend
+// 🔧 Save to MongoDB
+         await newUser.save();
+___________________________________________________________________________
+ 4) const { userId } = socket.handshake.query; in server.js  change to
+ const  userId  = socket.handshake.query;
+
+___________________________________________________________________________
+5)
+setMessages((prevMessages) => [...prevMessages, data.newMessage])
+to  data.message
+___________________________________________________________________________
+6) in chatCintainer
+useEffect(() => {
+        getUsers(); // ✅ fetch users once the component mounts
+    }, []);
