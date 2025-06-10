@@ -33,3 +33,34 @@ ___________________________________________________________________________
 useEffect(() => {
         getUsers(); // ✅ fetch users once the component mounts
     }, []);
+    ___________________________________________________________________________
+    7) 
+       // function to get all users for sidebar
+    const getUsers = async () => {
+        try {
+            const { data } = await axios.get("/api/messages/users");
+            if (data.success) {
+                setUsers(data.users)
+                setUnseenMessages(data.unseenMessages)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    to------
+      // function to get all users for sidebar
+    const getUsers = async () => {
+        try {
+            const res = await axios.get("/api/messages/users", {
+                headers: {
+                    token: localStorage.getItem("token"), // ✅ Add token here
+                },
+            });
+
+            setUsers(res.data.users); // or however you're updating context
+            setUnseenMessages(res.data.unseenMessages);
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }

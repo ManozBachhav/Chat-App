@@ -15,11 +15,14 @@ export const ChatProvider = ({ children }) => {
     // function to get all users for sidebar
     const getUsers = async () => {
         try {
-            const { data } = await axios.get("/api/messages/users");
-            if (data.success) {
-                setUsers(data.users)
-                setUnseenMessages(data.unseenMessages)
-            }
+            const res = await axios.get("/api/messages/users", {
+                headers: {
+                    token: localStorage.getItem("token"), // ✅ Add token here
+                },
+            });
+
+            setUsers(res.data.users); // or however you're updating context
+            setUnseenMessages(res.data.unseenMessages);
         } catch (error) {
             toast.error(error.message)
         }
@@ -41,7 +44,7 @@ export const ChatProvider = ({ children }) => {
     // function to send message to selected user
     const sendMessage = async (messageData) => {
         try {
-            const { data } = await axios.post(`/api/messages/send/${selectedUser._id}`,messageData);
+            const { data } = await axios.post(`/api/messages/send/${selectedUser._id}`, messageData);
             if (data.success) {
                 setMessages((prevMessages) => [...prevMessages, data.message])
             } else {
@@ -86,8 +89,8 @@ export const ChatProvider = ({ children }) => {
 
 
     const value = {
-        messages, users, selectedUser,getUsers,getMessages,sendMessage,
-        setSelectedUser, unseenMessages,setUnseenMessages 
+        messages, users, selectedUser, getUsers, getMessages, sendMessage,
+        setSelectedUser, unseenMessages, setUnseenMessages
 
     }
 
