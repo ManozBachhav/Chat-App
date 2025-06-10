@@ -64,3 +64,33 @@ useEffect(() => {
             toast.error(error.message)
         }
     }
+
+    ___________________________________________________________________________
+    8)   // function to send message to selected user
+    const sendMessage = async (messageData) => {
+        try {
+            const { data } = await axios.post(`/api/messages/send/${selectedUser._id}`, messageData);
+            if (data.success) {
+                setMessages((prevMessages) => [...prevMessages, data.message])
+            } else {
+                toast.error(data.message);
+            }
+
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+    to--------
+
+    const sendMessage = async (messageData) => {
+  try {
+    const { data } = await axios.post(
+      `/api/messages/send/${selectedUser._id}`,
+      messageData,
+      {
+        headers: {
+          token: localStorage.getItem("token"), // ✅ Include token here
+        },
+      }
+    );
