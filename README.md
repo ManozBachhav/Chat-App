@@ -121,7 +121,7 @@ Try it out here:
 ## 🤝 Author
 
 Built with ❤️ by [**Manoz Bachhav**](https://github.com/ManozBachhav)
-📬 \[email : manojbachhav281@email.com]
+📬 \[email : manojbachhav281@gmail.com]
 
 ---
 
